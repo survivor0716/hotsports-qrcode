@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="black" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <meta content="email=no" name="format-detection">
+  <title>热动</title>
+  <style type="text/css">
+    *{padding: 0;margin: 0;}
+    img{border: none;}
+    html,body{height: 100%;}
+    h1,p{width: 100%;color: #FFFFFF;font-size: 15px;position: absolute;top: 248px;left: 0;text-align: center;line-height: 1;}
+    p{font-size: 9px;top: 282px;}
+
+    #page{
+      position: relative;
+      width: 430px;
+      height: 603px;
+      overflow: hidden;
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+<div id="page">
+  <img src="img/qrcode_print_1206.png" alt="" width="430" height="603">
+  <img src="" alt="" id="qrcode" style="
+    position: absolute;
+    top: 205px;
+    left: 115px;
+    width: 200px;
+    height: 200px;
+"/>
+</div>
+
+
+<script type="text/javascript" src="js/pageResponse.min.js"></script>
+<script type="text/javascript">
+  window.onload = window.onresize = function(){
+    pageResponse({
+      selectors : '#page',     //模块选择器，使用querySelectorAll的方法
+      mode : 'contain',     // auto || contain || cover ，默认模式为auto
+      width : '430',      //输入页面的宽度，只支持输入数值，默认宽度为320px
+      height : '603'      //输入页面的高度，只支持输入数值，默认高度为504px
+    });
+
+    window.document.getElementById('qrcode').setAttribute('src', decodeURIComponent(GetQueryString('qrcode')));
+  };
+
+  //获取地址栏参数
+  var GetQueryString = function (name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+      return decodeURI(r[2]);
+    }
+    return null;
+  };
+</script>
+</body>
+</html>
